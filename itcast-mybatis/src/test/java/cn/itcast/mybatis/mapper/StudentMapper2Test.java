@@ -1,6 +1,9 @@
 package cn.itcast.mybatis.mapper;
 
+import cn.itcast.mybatis.pojo.Student;
 import cn.itcast.mybatis.pojo.Student2;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -9,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.entity.Config;
+import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.mapperhelper.MapperHelper;
 
 import java.io.InputStream;
@@ -95,7 +99,39 @@ public class StudentMapper2Test {
         studentMapper2.deleteByPrimaryKey(7L);
     }
 
+    /**
+     * 分页每页2条数据，查询第2页的年龄大于等于14的男性学生并按照年龄降序排序
+     */
     @Test
     public void selectByExample() {
+        //设置分页
+        PageHelper.startPage(2, 2);
+
+        //创建查询对象
+        Example example = new Example(Student2.class);
+
+        //创建查询条件对象
+        Example.Criteria criteria = example.createCriteria();
+
+        //男性学生
+        criteria.andEqualTo("gender", 1);
+
+        //年龄大于等于14
+        criteria.andGreaterThanOrEqualTo("age", 14);
+
+        //按照年龄降序排序
+        example.orderBy("age").desc();
+
+        //查询
+        List<Student2> list = studentMapper2.selectByExample(example);
+
+        PageInfo<Student2> pageInfo = new PageInfo<>(list);
+
+        System.out.println("总记录数：" + pageInfo.getTotal() + "；总页数：" + pageInfo.getPages() + "；当前页号：" +
+                pageInfo.getPageNum() +"；页大小：" + pageInfo.getPageSize());
+
+        for (Student2 student : pageInfo.getList()) {
+            System.out.println(student);
+        }
     }
 }
