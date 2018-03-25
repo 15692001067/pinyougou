@@ -36,5 +36,6 @@
     </environments>
     <mappers>
         <mapper resource="StudentMapper.xml"/>
+        <mapper class="cn.itcast.mybatis.mapper.StudentMapper2"/>
     </mappers>
 </configuration>
