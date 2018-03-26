@@ -89,4 +89,34 @@ public class BrandController {
         return Result.fail("修改失败");
     }
 
+    /**
+     * 批量删除品牌数据
+     * @param ids 品牌id 集合
+     * @return 操作结果
+     */
+    @GetMapping("/delete")
+    public Result delete(Long[] ids){
+        try {
+            brandService.deleteByIds(ids);
+            return Result.ok("删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.fail("删除失败");
+    }
+
+    /**
+     * 根据查询条件分页查询品牌列表
+     * @param page 页号
+     * @param rows 页大小
+     * @param brand 查询条件
+     * @return 分页对象
+     */
+    @PostMapping("/search")
+    public PageResult search(@RequestParam(value = "page", defaultValue = "1")Integer page,
+                             @RequestParam(value = "rows", defaultValue =  "10")Integer rows,
+                             @RequestBody TbBrand brand){
+        return brandService.search(page, rows, brand);
+    }
+
 }
