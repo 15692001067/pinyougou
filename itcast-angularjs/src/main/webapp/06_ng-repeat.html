@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS测试</title>
+    <script src="js/angular.min.js"></script>
+    <script type="text/javascript">
+
+        //定义一个模块；参数1：模块名称，参数2：表示需要加载额外的模块吗？，如果有则在数组里面指定
+        var app = angular.module("app",[]);
+
+        //定义一个处理器
+        app.controller("myController", function ($scope) {
+
+            // 初始化一个数值集合
+            $scope.list = [1,2,3,4,5];
+            // 初始化一个自定义类型集合
+            $scope.persons = [{"id":121,"name":"传智播客1","gender":1},
+                {"id":122,"name":"传智播客2","gender":0},
+                {"id":123,"name":"传智播客3","gender":1}];
+        });
+    </script>
+</head>
+<body ng-app="app" ng-controller="myController">
+数值集合：<br>
+<div ng-repeat="num in list">
+    {{num}}
+    <br>
+</div>
+
+自定义类型集合的遍历：
+<table>
+    <thead>
+        <tr>
+            <td>id</td>
+            <td>name</td>
+            <td>gender</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="p in persons">
+            <td>{{p.id}}</td>
+            <td>{{p.name}}</td>
+            <td>{{p.gender}}</td>
+        </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>
