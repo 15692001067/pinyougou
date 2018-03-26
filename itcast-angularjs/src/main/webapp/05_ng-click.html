@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS测试</title>
+    <script src="js/angular.min.js"></script>
+    <script type="text/javascript">
+
+        //定义一个模块；参数1：模块名称，参数2：表示需要加载额外的模块吗？，如果有则在数组里面指定
+        var app = angular.module("app",[]);
+
+        //定义一个处理器
+        app.controller("myController", function ($scope) {
+
+            //初始化z
+            $scope.z = 0;
+
+            //定义一个加的数值计算方法
+            $scope.add = function () {
+                $scope.z = parseInt($scope.x)+parseInt($scope.y);
+            };
+        });
+    </script>
+</head>
+<body ng-app="app" ng-controller="myController">
+x：<input ng-model="x"><br>
+y：<input ng-model="y"><br>
+<button ng-click="add()">点击进行计算</button><br>
+
+x+y=<input ng-model="z"/>
+</body>
+</html>
