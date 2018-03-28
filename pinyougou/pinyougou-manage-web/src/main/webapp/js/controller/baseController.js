@@ -34,4 +34,18 @@ app.controller("baseController", function ($scope) {
         }
 
     };
+
+    //将一个json格式字符串的某个属性的值遍历出来并使用 , 分隔返回字符串
+    $scope.jsonToString = function (jsonStr, key) {
+        var str = "";
+        var jsonArray = JSON.parse(jsonStr);
+        for (var i = 0; i < jsonArray.length; i++) {
+            var obj = jsonArray[i];
+            if(i > 0){
+                str += ",";
+            }
+            str += obj[key];
+        }
+        return str;
+    };
 });
