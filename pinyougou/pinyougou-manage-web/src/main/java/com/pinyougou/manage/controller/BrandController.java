@@ -1,7 +1,7 @@
 package com.pinyougou.manage.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.pinyougou.common.vo.Result;
+import com.pinyougou.vo.Result;
 import com.pinyougou.pojo.TbBrand;
 import com.pinyougou.pojo.TbItem;
 import com.pinyougou.sellergoods.service.BrandService;
