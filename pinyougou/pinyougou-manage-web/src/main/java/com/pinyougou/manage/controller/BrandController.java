@@ -9,6 +9,7 @@ import com.pinyougou.vo.PageResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/brand")
 @RestController // 组合注解：@ResponseBody @Controller
@@ -117,6 +118,15 @@ public class BrandController {
                              @RequestParam(value = "rows", defaultValue =  "10")Integer rows,
                              @RequestBody TbBrand brand){
         return brandService.search(page, rows, brand);
+    }
+
+    /**
+     * 查询select2需要的所有品牌的数据（结构要：[{id,text}]）
+     * @return select2需要的所有品牌的数据
+     */
+    @GetMapping("/selectOptionList")
+    public List<Map<String, String>> selectOptionList(){
+        return brandService.selectOptionList();
     }
 
 }

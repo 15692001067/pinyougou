@@ -29,4 +29,9 @@ app.service("specificationService",function ($http) {
         return $http.post("../specification/search.do?page=" + page + "&rows=" + rows, searchEntity);
 
     };
+
+    this.selectOptionList = function () {
+        return $http.get("../specification/selectOptionList.do");
+    };
+
 });
